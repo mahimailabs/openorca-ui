@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Swarm, ClawAgent } from '@openorca/core/clawData';
+import { Swarm, ClawAgent } from '@openorca-ui/core/clawData';
 import { Users, Target, CheckCircle, Loader2, ChevronUp, ChevronDown } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import clawAgentImg from '@openorca/react/assets/images/claw-agent.png';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 
 interface SwarmDashboardProps {
   swarms: Swarm[];

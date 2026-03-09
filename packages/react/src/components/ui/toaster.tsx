@@ -1,4 +1,4 @@
-import { useToast } from "@openorca/react/hooks/use-toast"
+import { useToast } from "@openorca-ui/react/hooks/use-toast"
 import {
   Toast,
   ToastClose,
@@ -6,7 +6,7 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@openorca/react/components/ui/toast"
+} from "@openorca-ui/react/components/ui/toast"
 
 export function Toaster() {
   const { toasts } = useToast()

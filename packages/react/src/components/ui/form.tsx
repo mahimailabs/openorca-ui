@@ -10,8 +10,8 @@ import {
   type FieldValues,
 } from "react-hook-form"
 
-import { cn } from "@openorca/react/lib/utils"
-import { Label } from "@openorca/react/components/ui/label"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Label } from "@openorca-ui/react/components/ui/label"
 
 const Form = FormProvider
 

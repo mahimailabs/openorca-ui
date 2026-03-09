@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@openorca/react/lib/utils"
+import { cn } from "@openorca-ui/react/lib/utils"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {

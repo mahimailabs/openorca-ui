@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { rigs } from '@openorca/react/lib/mockData';
+import { rigs } from '@openorca-ui/react/lib/mockData';
 import { GitBranch, ChevronDown, Check } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
+import { Button } from '@openorca-ui/react/components/ui/button';
 
 interface RigFilterProps {
   selectedRig: string | null;

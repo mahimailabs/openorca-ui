@@ -1,19 +1,19 @@
 import { useState, useMemo, useCallback } from 'react';
-import { AgentVisualization } from '@openorca/react/components/AgentVisualization';
-import { ActionTimeline } from '@openorca/react/components/ActionTimeline';
-import { AgentStream } from '@openorca/react/components/AgentStream';
-import { AgentInterventionPanel } from '@openorca/react/components/AgentInterventionPanel';
-import { AgentInspector } from '@openorca/react/components/AgentInspector';
-import { SwarmDashboard } from '@openorca/react/components/SwarmDashboard';
-import { FleetHealthPanel } from '@openorca/react/components/FleetHealthPanel';
+import { AgentVisualization } from '@openorca-ui/react/components/AgentVisualization';
+import { ActionTimeline } from '@openorca-ui/react/components/ActionTimeline';
+import { AgentStream } from '@openorca-ui/react/components/AgentStream';
+import { AgentInterventionPanel } from '@openorca-ui/react/components/AgentInterventionPanel';
+import { AgentInspector } from '@openorca-ui/react/components/AgentInspector';
+import { SwarmDashboard } from '@openorca-ui/react/components/SwarmDashboard';
+import { FleetHealthPanel } from '@openorca-ui/react/components/FleetHealthPanel';
 import { SettingsPanel } from './SettingsPanel';
 import { 
   generateClawData, 
   ClawOrchestratorData, 
   ClawAgent, 
   AgentTask,
-} from '@openorca/core/clawData';
-import { Button } from '@openorca/react/components/ui/button';
+} from '@openorca-ui/core/clawData';
+import { Button } from '@openorca-ui/react/components/ui/button';
 import { AnimatePresence } from 'framer-motion';
 import { 
   Globe, Layers, AlertTriangle, Settings, Wifi, WifiOff, Zap,

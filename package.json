@@ -15,7 +15,7 @@
     "dev:client": "vite dev --config vite.config.ts --port 5000",
     "dev": "vite dev --config vite.config.ts --port 5000",
     "build": "vite build --config vite.config.ts",
-    "build:packages": "npm run build --workspace @openorca/core && npm run build --workspace @openorca/react && npm run build --workspace @openorca/theme",
+    "build:packages": "npm run build --workspace @openorca-ui/core && npm run build --workspace @openorca-ui/react && npm run build --workspace @openorca-ui/theme",
     "preview": "vite preview --config vite.config.ts --host 0.0.0.0 --port 5000",
     "check": "tsc"
   },

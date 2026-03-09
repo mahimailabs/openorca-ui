@@ -1,3 +1,3 @@
 export * from "./OpenOrcaDashboard";
 export * from "./OpenOrcaProvider";
-export { ThemeProvider, useTheme, type Theme } from "@openorca/react";
+export { ThemeProvider, useTheme, type Theme } from "@openorca-ui/react";

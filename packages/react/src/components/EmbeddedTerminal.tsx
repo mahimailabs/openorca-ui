@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, KeyboardEvent, useCallback } from 'react';
-import { useTerminalSession, TerminalLine, LoopContext } from '@openorca/react/hooks/useTerminalSession';
+import { useTerminalSession, TerminalLine, LoopContext } from '@openorca-ui/react/hooks/useTerminalSession';
 import { Terminal, ChevronRight, Loader2, X, Minimize2, Square, Info, Activity, Trash2, HelpCircle } from 'lucide-react';
 
 interface EmbeddedTerminalProps {

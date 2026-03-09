@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   RalphLoop, loopModeColors, loopStatusColors, refinementColors 
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { 
   Play, Pause, RotateCcw, Zap, AlertTriangle, 
   ChevronUp, ChevronDown, RefreshCw, Terminal
 } from 'lucide-react';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { Button } from '@openorca/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
 import { EmbeddedTerminal } from './EmbeddedTerminal';
 
 interface LoopStreamProps {

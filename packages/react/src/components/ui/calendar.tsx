@@ -8,8 +8,8 @@ import {
 } from "lucide-react"
 import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
 
-import { cn } from "@openorca/react/lib/utils"
-import { Button, buttonVariants } from "@openorca/react/components/ui/button"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Button, buttonVariants } from "@openorca-ui/react/components/ui/button"
 
 function Calendar({
   className,

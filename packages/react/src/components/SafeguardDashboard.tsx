@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   SystemHealth, Safeguard, 
   loopStatusColors 
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { 
   Shield, CheckCircle, AlertTriangle, XCircle, 
   RotateCcw, Zap, Target, Activity, TrendingUp,
   ChevronDown, ChevronUp
 } from 'lucide-react';
-import { Badge } from '@openorca/react/components/ui/badge';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
 
 interface SafeguardDashboardProps {
   systemHealth: SystemHealth;

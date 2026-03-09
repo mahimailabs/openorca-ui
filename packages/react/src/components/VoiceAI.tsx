@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Mic, MicOff, Volume2 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import type { NodeData } from '@openorca/react/lib/mockData';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import type { NodeData } from '@openorca-ui/react/lib/mockData';
 
 interface VoiceAIProps {
   peopleData: NodeData[];

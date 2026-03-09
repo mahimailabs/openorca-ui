@@ -1,7 +1,7 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
-import { statusColors, convoyColors } from '@openorca/react/lib/mockData';
+import { statusColors, convoyColors } from '@openorca-ui/react/lib/mockData';
 
 interface NetworkCanvasProps {
   data: any;

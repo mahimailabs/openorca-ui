@@ -5,8 +5,8 @@ import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
 
-import { cn } from "@openorca/react/lib/utils"
-import { Dialog, DialogContent } from "@openorca/react/components/ui/dialog"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Dialog, DialogContent } from "@openorca-ui/react/components/ui/dialog"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

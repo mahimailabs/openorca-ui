@@ -1,4 +1,4 @@
-import { cn } from "@openorca/react/lib/utils"
+import { cn } from "@openorca-ui/react/lib/utils"
 
 function Skeleton({
   className,

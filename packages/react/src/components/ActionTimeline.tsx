@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ActionEntry, ClawAgent, integrationIcons } from '@openorca/core/clawData';
+import { ActionEntry, ClawAgent, integrationIcons } from '@openorca-ui/core/clawData';
 import { Check, X, Clock, Mail, MessageCircle, FileText, Globe, Calendar, Terminal, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
+import { Button } from '@openorca-ui/react/components/ui/button';
 
 interface ActionTimelineProps {
   actions: ActionEntry[];

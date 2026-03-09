@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ClawAgent, Swarm, domainColors, statusColors, integrationIcons,
   AgentDomain, AgentStatus
-} from '@openorca/core/clawData';
+} from '@openorca-ui/core/clawData';
 import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
-import clawAgentImg from '@openorca/react/assets/images/claw-agent.png';
+import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 
 interface AgentVisualizationProps {
   agents: ClawAgent[];

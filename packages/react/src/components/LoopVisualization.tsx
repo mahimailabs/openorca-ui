@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   RalphLoop, Convoy, loopModeColors, loopStatusColors, refinementColors,
   LoopMode, LoopStatus
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
-import clawAgentImg from '@openorca/react/assets/images/claw-agent.png';
+import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 
 interface LoopVisualizationProps {
   loops: RalphLoop[];

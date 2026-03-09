@@ -7,5 +7,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ["react", "react-dom", "@openorca/core", "@openorca/react"],
+  external: ["react", "react-dom", "@openorca-ui/core", "@openorca-ui/react"],
 });

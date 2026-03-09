@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ClawAgent, AgentTask, ActionEntry, domainColors, integrationIcons } from '@openorca/core/clawData';
-import { Button } from '@openorca/react/components/ui/button';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@openorca/react/components/ui/collapsible';
-import { EmbeddedTerminal } from '@openorca/react/components/EmbeddedTerminal';
-import { LoopContext } from '@openorca/react/hooks/useTerminalSession';
+import { ClawAgent, AgentTask, ActionEntry, domainColors, integrationIcons } from '@openorca-ui/core/clawData';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@openorca-ui/react/components/ui/collapsible';
+import { EmbeddedTerminal } from '@openorca-ui/react/components/EmbeddedTerminal';
+import { LoopContext } from '@openorca-ui/react/hooks/useTerminalSession';
 import { 
   X, Play, Pause, Cpu, HardDrive, Clock, CheckCircle, 
   MessageCircle, Globe, FileText, Terminal, ChevronDown
 } from 'lucide-react';
-import clawAgentImg from '@openorca/react/assets/images/claw-agent.png';
+import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 
 interface AgentInspectorProps {
   agent: ClawAgent;

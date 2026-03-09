@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { 
   RalphLoop, Thread, Safeguard, 
   loopModeColors, loopStatusColors, refinementColors 
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { 
   X, GitBranch, Clock, Play, Pause, RotateCcw, 
   Shield, CheckCircle, XCircle, AlertCircle, 
   FileCode, ChevronRight, Zap, Target, Terminal
 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { Separator } from '@openorca/react/components/ui/separator';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { Separator } from '@openorca-ui/react/components/ui/separator';
 import { EmbeddedTerminal } from './EmbeddedTerminal';
 
 interface ThreadInspectorProps {

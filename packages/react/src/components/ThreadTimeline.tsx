@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Thread, ThreadDecision, ForkPoint, 
   loopModeColors, loopStatusColors, refinementColors 
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { 
   GitBranch, Clock, CheckCircle, XCircle, AlertCircle, 
   Share2, Download, ChevronDown, ChevronRight, Maximize2 
 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import { Badge } from '@openorca/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
 
 interface ThreadTimelineProps {
   threads: Thread[];

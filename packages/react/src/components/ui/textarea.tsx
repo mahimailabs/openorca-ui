@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@openorca/react/lib/utils"
+import { cn } from "@openorca-ui/react/lib/utils"
 
 const Textarea = React.forwardRef<
   HTMLTextAreaElement,

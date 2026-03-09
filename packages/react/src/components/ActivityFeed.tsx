@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NodeData, statusColors } from '@openorca/react/lib/mockData';
+import { NodeData, statusColors } from '@openorca-ui/react/lib/mockData';
 import { Activity, ChevronDown, ChevronUp, Package, Users, GitBranch, Clock, Bot } from 'lucide-react';
-import { Badge } from '@openorca/react/components/ui/badge';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
 
 interface ActivityFeedProps {
   nodes: NodeData[];

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Search, Home, Bell, Mail, User, MessageCircle, Heart, Repeat2, BarChart3, Share, MoreHorizontal } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
+import { Button } from '@openorca-ui/react/components/ui/button';
 
 interface TwitterDropdownProps {
   isOpen: boolean;

@@ -4,11 +4,11 @@ import {
   Settings, X, Key, CheckCircle, AlertCircle, 
   Loader2, Eye, EyeOff, ExternalLink, Sun, Moon
 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import { Input } from '@openorca/react/components/ui/input';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { useApiKey } from '@openorca/react/hooks/useApiKey';
-import { useTheme } from '@openorca/react';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Input } from '@openorca-ui/react/components/ui/input';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { useApiKey } from '@openorca-ui/react/hooks/useApiKey';
+import { useTheme } from '@openorca-ui/react';
 
 interface SettingsPanelProps {
   isOpen: boolean;

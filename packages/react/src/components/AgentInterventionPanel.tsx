@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ClawAgent, Intervention, domainColors } from '@openorca/core/clawData';
-import { Button } from '@openorca/react/components/ui/button';
+import { ClawAgent, Intervention, domainColors } from '@openorca-ui/core/clawData';
+import { Button } from '@openorca-ui/react/components/ui/button';
 import { AlertTriangle, Check, X, Clock, ChevronRight } from 'lucide-react';
-import clawAgentImg from '@openorca/react/assets/images/claw-agent.png';
+import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 
 interface AgentInterventionPanelProps {
   agents: ClawAgent[];

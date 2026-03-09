@@ -1,10 +1,10 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@openorca/react/lib/utils"
-import { Button } from "@openorca/react/components/ui/button"
-import { Input } from "@openorca/react/components/ui/input"
-import { Textarea } from "@openorca/react/components/ui/textarea"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Button } from "@openorca-ui/react/components/ui/button"
+import { Input } from "@openorca-ui/react/components/ui/input"
+import { Textarea } from "@openorca-ui/react/components/ui/textarea"
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

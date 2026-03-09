@@ -5,25 +5,25 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
 import { PanelLeftIcon } from "lucide-react"
 
-import { useIsMobile } from "@openorca/react/hooks/use-mobile"
-import { cn } from "@openorca/react/lib/utils"
-import { Button } from "@openorca/react/components/ui/button"
-import { Input } from "@openorca/react/components/ui/input"
-import { Separator } from "@openorca/react/components/ui/separator"
+import { useIsMobile } from "@openorca-ui/react/hooks/use-mobile"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Button } from "@openorca-ui/react/components/ui/button"
+import { Input } from "@openorca-ui/react/components/ui/input"
+import { Separator } from "@openorca-ui/react/components/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@openorca/react/components/ui/sheet"
-import { Skeleton } from "@openorca/react/components/ui/skeleton"
+} from "@openorca-ui/react/components/ui/sheet"
+import { Skeleton } from "@openorca-ui/react/components/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@openorca/react/components/ui/tooltip"
+} from "@openorca-ui/react/components/ui/tooltip"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7

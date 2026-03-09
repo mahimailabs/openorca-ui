@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NodeData, CodeChange, statusColors } from '@openorca/react/lib/mockData';
+import { NodeData, CodeChange, statusColors } from '@openorca-ui/react/lib/mockData';
 import { 
   X, ChevronRight, ChevronDown, File, Folder, FolderOpen, 
   Bot, Check, XCircle, Clock, GitBranch, FileCode, Plus, Minus, Edit3
 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import { Badge } from '@openorca/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
 
 interface CodePanelProps {
   isOpen: boolean;

@@ -3,9 +3,9 @@
 import { useMemo } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@openorca/react/lib/utils"
-import { Label } from "@openorca/react/components/ui/label"
-import { Separator } from "@openorca/react/components/ui/separator"
+import { cn } from "@openorca-ui/react/lib/utils"
+import { Label } from "@openorca-ui/react/components/ui/label"
+import { Separator } from "@openorca-ui/react/components/ui/separator"
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (

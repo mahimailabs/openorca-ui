@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   RalphLoop, FailureDomain, 
   loopModeColors, severityColors 
-} from '@openorca/react/lib/loomData';
+} from '@openorca-ui/react/lib/loomData';
 import { 
   AlertTriangle, Shield, CheckCircle, XCircle, 
   ChevronRight, ChevronDown, Zap, Lock, Database, 
   Globe, Code, X, Terminal
 } from 'lucide-react';
-import { Button } from '@openorca/react/components/ui/button';
-import { Badge } from '@openorca/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
 import { EmbeddedTerminal } from './EmbeddedTerminal';
 
 interface InterventionPanelProps {

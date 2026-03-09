@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, ChevronDown, Plus, Send, Clock, Pencil, Terminal, Bot, Cpu } from 'lucide-react';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { Button } from '@openorca/react/components/ui/button';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
 
 interface TerminalChatProps {
   isOpen: boolean;

@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { NodeData, statusColors, convoyColors } from '@openorca/react/lib/mockData';
+import { NodeData, statusColors, convoyColors } from '@openorca-ui/react/lib/mockData';
 import { X, Database, Sparkles, Route, Users, Bot, GitBranch, Package, Mail, Clock, CheckCircle, AlertCircle, Pause, Play, Circle, FileCode, Check, XCircle, Plus, Minus } from 'lucide-react';
-import { Badge } from '@openorca/react/components/ui/badge';
-import { Button } from '@openorca/react/components/ui/button';
-import { Separator } from '@openorca/react/components/ui/separator';
+import { Badge } from '@openorca-ui/react/components/ui/badge';
+import { Button } from '@openorca-ui/react/components/ui/button';
+import { Separator } from '@openorca-ui/react/components/ui/separator';
 
 interface ProfileCardProps {
   node: NodeData | null;
