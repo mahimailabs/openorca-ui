@@ -10,5 +10,6 @@ export * from "./components/ui/toaster";
 export * from "./components/ui/tooltip";
 export * from "./contexts/ThemeContext";
 export * from "./hooks/useApiKey";
+export * from "./hooks/useOpenOrcaRuntime";
 export * from "./hooks/useTerminalSession";
 export * from "./lib/queryClient";

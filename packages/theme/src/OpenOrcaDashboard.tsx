@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { AgentVisualization } from '@openorca-ui/react/components/AgentVisualization';
 import { ActionTimeline } from '@openorca-ui/react/components/ActionTimeline';
 import { AgentStream } from '@openorca-ui/react/components/AgentStream';
@@ -6,6 +6,7 @@ import { AgentInterventionPanel } from '@openorca-ui/react/components/AgentInter
 import { AgentInspector } from '@openorca-ui/react/components/AgentInspector';
 import { SwarmDashboard } from '@openorca-ui/react/components/SwarmDashboard';
 import { FleetHealthPanel } from '@openorca-ui/react/components/FleetHealthPanel';
+import { useOpenOrcaRuntime, type OpenOrcaRuntimeConfig } from '@openorca-ui/react';
 import { SettingsPanel } from './SettingsPanel';
 import { 
   generateClawData, 
@@ -13,17 +14,33 @@ import {
   ClawAgent, 
   AgentTask,
 } from '@openorca-ui/core/clawData';
+import type { OpenOrcaConnectionStatus } from '@openorca-ui/core/runtime';
 import { Button } from '@openorca-ui/react/components/ui/button';
 import { AnimatePresence } from 'framer-motion';
 import { 
   Globe, Layers, AlertTriangle, Settings, Wifi, WifiOff, Zap,
-  PanelLeft, PanelBottom, Bell, Users
+  PanelLeft, PanelBottom, Bell, Users, Radio
 } from 'lucide-react';
 
 const initialData = generateClawData();
 
-export function OpenOrcaDashboard() {
-  const [data, setData] = useState<ClawOrchestratorData>(initialData);
+export interface OpenOrcaDashboardProps {
+  mode?: 'demo' | 'runtime';
+  runtimeConfig?: OpenOrcaRuntimeConfig;
+}
+
+function getRuntimeTone(status: OpenOrcaConnectionStatus) {
+  if (status === 'connected') return 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10';
+  if (status === 'degraded') return 'text-amber-400 border-amber-500/30 bg-amber-500/10';
+  if (status === 'disconnected' || status === 'error') return 'text-red-400 border-red-500/30 bg-red-500/10';
+  return 'text-blue-400 border-blue-500/30 bg-blue-500/10';
+}
+
+export function OpenOrcaDashboard({
+  mode = 'demo',
+  runtimeConfig,
+}: OpenOrcaDashboardProps) {
+  const [demoData, setDemoData] = useState<ClawOrchestratorData>(initialData);
   const [selectedAgent, setSelectedAgent] = useState<ClawAgent | null>(null);
   const [selectedTask, setSelectedTask] = useState<AgentTask | null>(null);
   const [filter, setFilter] = useState<'all' | 'active' | 'interventions'>('all');
@@ -33,6 +50,31 @@ export function OpenOrcaDashboard() {
   const [streamMinimized, setStreamMinimized] = useState(false);
   const [interventionsHidden, setInterventionsHidden] = useState(false);
   const [swarmsCollapsed, setSwarmsCollapsed] = useState(false);
+
+  const { snapshot, runtimeInfo, status: runtimeStatus, error: runtimeError, resolveIntervention } =
+    useOpenOrcaRuntime(mode === 'runtime' ? runtimeConfig : undefined);
+
+  const data = useMemo(
+    () => (mode === 'runtime' && snapshot ? snapshot : demoData),
+    [demoData, mode, snapshot],
+  );
+  const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || 'langgraph';
+
+  useEffect(() => {
+    if (!selectedAgent) {
+      return;
+    }
+
+    const nextAgent = data.agents.find((agent) => agent.id === selectedAgent.id) || null;
+    setSelectedAgent(nextAgent);
+
+    if (nextAgent?.currentTaskId) {
+      const nextTask = data.tasks.find((task) => task.id === nextAgent.currentTaskId) || null;
+      setSelectedTask(nextTask);
+    } else {
+      setSelectedTask(null);
+    }
+  }, [data.agents, data.tasks, selectedAgent]);
 
   const activeCount = useMemo(() => 
     data.agents.filter(a => a.status === 'active').length, 
@@ -61,25 +103,48 @@ export function OpenOrcaDashboard() {
     setSelectedAgent(agent || null);
   }, [data.agents]);
 
-  const handleResolveIntervention = useCallback((agentId: string, action: 'approve' | 'deny' | 'later') => {
-    setData(prev => ({
-      ...prev,
-      agents: prev.agents.map(a => 
-        a.id === agentId 
-          ? { 
-              ...a, 
-              interventionRequired: false, 
-              interventionReason: undefined,
-              status: action === 'deny' ? 'idle' as const : 'active' as const,
-            }
-          : a
-      ),
-      interventions: prev.interventions.filter(i => i.agentId !== agentId),
-    }));
-  }, []);
+  const handleResolveIntervention = useCallback((interventionId: string, action: 'approve' | 'deny' | 'later') => {
+    if (mode === 'runtime') {
+      void resolveIntervention({
+        interventionId,
+        action,
+        actor: {
+          type: 'human',
+          name: 'OpenOrca operator',
+        },
+      });
+      return;
+    }
+
+    setDemoData(prev => {
+      const intervention = prev.interventions.find((item) => item.id === interventionId);
+      if (!intervention) {
+        return prev;
+      }
+
+      return {
+        ...prev,
+        agents: prev.agents.map(a => 
+          a.id === intervention.agentId
+            ? { 
+                ...a, 
+                interventionRequired: false, 
+                interventionReason: undefined,
+                status: action === 'deny' ? 'idle' as const : 'active' as const,
+              }
+            : a
+        ),
+        interventions: prev.interventions.filter(i => i.id !== interventionId),
+      };
+    });
+  }, [mode, resolveIntervention]);
 
   const handleWakeAgent = useCallback((agentId: string) => {
-    setData(prev => ({
+    if (mode === 'runtime') {
+      return;
+    }
+
+    setDemoData(prev => ({
       ...prev,
       agents: prev.agents.map(a => 
         a.id === agentId 
@@ -87,10 +152,14 @@ export function OpenOrcaDashboard() {
           : a
       ),
     }));
-  }, []);
+  }, [mode]);
 
   const handlePauseAgent = useCallback((agentId: string) => {
-    setData(prev => ({
+    if (mode === 'runtime') {
+      return;
+    }
+
+    setDemoData(prev => ({
       ...prev,
       agents: prev.agents.map(a => 
         a.id === agentId 
@@ -98,7 +167,7 @@ export function OpenOrcaDashboard() {
           : a
       ),
     }));
-  }, []);
+  }, [mode]);
 
   const closeInspector = useCallback(() => {
     setSelectedAgent(null);
@@ -137,6 +206,17 @@ export function OpenOrcaDashboard() {
               Fleet: <span className="text-secondary">{data.agents.length} Agents</span> // 
               Machines: <span className="text-primary">{data.machines.length}</span>
             </p>
+            {mode === 'runtime' && (
+              <div className={`mt-3 inline-flex items-center gap-2 rounded border px-2 py-1 text-[10px] uppercase tracking-widest ${getRuntimeTone(runtimeStatus)}`}>
+                <Radio className="h-3 w-3" />
+                <span>
+                  {runtimeLabel} / {runtimeStatus}
+                </span>
+              </div>
+            )}
+            {mode === 'runtime' && runtimeError && (
+              <p className="mt-2 text-[11px] text-amber-300">{runtimeError}</p>
+            )}
           </div>
           
           <div className="hud-panel p-3 flex gap-6 items-center">

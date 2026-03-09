@@ -7,7 +7,7 @@ import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 interface AgentInterventionPanelProps {
   agents: ClawAgent[];
   interventions: Intervention[];
-  onResolve: (agentId: string, action: 'approve' | 'deny' | 'later') => void;
+  onResolve: (interventionId: string, action: 'approve' | 'deny' | 'later') => void;
   onAgentSelect: (agent: ClawAgent) => void;
   isHidden: boolean;
   onToggleHidden: () => void;
@@ -144,7 +144,7 @@ export function AgentInterventionPanel({
                     <Button
                       size="sm"
                       className="flex-1 h-8 text-xs bg-emerald-600 hover:bg-emerald-500"
-                      onClick={() => onResolve(intervention.agentId, 'approve')}
+                      onClick={() => onResolve(intervention.id, 'approve')}
                     >
                       <Check className="w-3.5 h-3.5 mr-1" />
                       Approve
@@ -153,7 +153,7 @@ export function AgentInterventionPanel({
                       size="sm"
                       variant="outline"
                       className="flex-1 h-8 text-xs border-red-500/50 text-red-400 hover:bg-red-500/10"
-                      onClick={() => onResolve(intervention.agentId, 'deny')}
+                      onClick={() => onResolve(intervention.id, 'deny')}
                     >
                       <X className="w-3.5 h-3.5 mr-1" />
                       Deny
@@ -162,7 +162,7 @@ export function AgentInterventionPanel({
                       size="sm"
                       variant="ghost"
                       className="h-8 px-2 text-xs"
-                      onClick={() => onResolve(intervention.agentId, 'later')}
+                      onClick={() => onResolve(intervention.id, 'later')}
                     >
                       <Clock className="w-3.5 h-3.5" />
                     </Button>

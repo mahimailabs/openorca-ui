@@ -22,6 +22,10 @@
     "./knowledge": {
       "types": "./dist/knowledge.d.ts",
       "import": "./dist/knowledge.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js"
     }
   }
 }
