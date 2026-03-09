@@ -1,0 +1,393 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  --font-sans: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+
+  --radius: 0px; /* Sharp corners for military look */
+}
+
+:root {
+  /* Stealth Tactical Theme - Shades of Grey & Pastels */
+  
+  /* Deep Gunmetal / Charcoal Backgrounds */
+  --background: 220 13% 10%; /* #16181d */
+  --foreground: 218 11% 65%; /* #949bb1 - Muted Text */
+
+  --card: 220 13% 13%; /* Slightly lighter than bg */
+  --card-foreground: 218 11% 80%;
+
+  --popover: 220 13% 13%;
+  --popover-foreground: 218 11% 80%;
+
+  /* Soft Pastel Blue for Primary Ops */
+  --primary: 200 95% 75%; /* #82cfff */
+  --primary-foreground: 220 13% 10%;
+
+  /* Soft Pastel Coral for Alerts/High Value */
+  --secondary: 350 85% 75%; /* #fca5a5 */
+  --secondary-foreground: 220 13% 10%;
+
+  /* Muted Slate */
+  --muted: 215 15% 25%;
+  --muted-foreground: 218 10% 50%;
+
+  --accent: 200 95% 75%;
+  --accent-foreground: 220 13% 10%;
+
+  --destructive: 350 60% 50%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 215 15% 20%;
+  --input: 215 15% 18%;
+  --ring: 200 95% 75%;
+
+  --radius: 0px;
+}
+
+.light {
+  /* Warm Beige/Cream Background - Tactical Industrial */
+  --background: 40 25% 92%; /* #ebe5db warm cream */
+  --foreground: 30 10% 15%; /* Dark charcoal for text */
+
+  --card: 40 20% 95%; /* Slightly lighter cream */
+  --card-foreground: 30 10% 12%;
+
+  --popover: 40 20% 95%;
+  --popover-foreground: 30 10% 12%;
+
+  /* Orange/Rust Primary - Like the reference */
+  --primary: 16 85% 50%; /* Rust orange #e65c1a */
+  --primary-foreground: 0 0% 100%;
+
+  /* Darker charcoal secondary */
+  --secondary: 30 8% 25%;
+  --secondary-foreground: 40 25% 95%;
+
+  /* Warm muted tones */
+  --muted: 38 18% 86%;
+  --muted-foreground: 30 8% 40%;
+
+  /* Orange accent matching primary */
+  --accent: 16 85% 50%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* Warm borders */
+  --border: 35 15% 80%;
+  --input: 38 18% 88%;
+  --ring: 16 85% 50%;
+
+  --radius: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    /* Subtle Topographic/Grid Texture */
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(130, 207, 255, 0.02) 0%, transparent 60%),
+      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+  
+  .light body {
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(230, 92, 26, 0.03) 0%, transparent 60%),
+      linear-gradient(rgba(30, 25, 20, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 25, 20, 0.03) 1px, transparent 1px);
+  }
+}
+
+/* Tactical HUD Elements - Refined */
+.hud-panel {
+  @apply bg-[#1a1c23]/90 border border-white/5 backdrop-blur-md relative shadow-lg;
+}
+
+.light .hud-panel {
+  @apply bg-[#f5f0e8]/95 border-[#d4cfc5]/80 shadow-md;
+}
+
+.loop-canvas-bg {
+  background: radial-gradient(ellipse at center, rgba(22,24,29,1) 0%, rgba(10,12,15,1) 100%);
+}
+
+.light .loop-canvas-bg {
+  background: radial-gradient(ellipse at center, rgba(235,229,219,1) 0%, rgba(220,212,198,1) 100%);
+}
+
+.light .hud-corner-tl::before,
+.light .hud-corner-tr::after,
+.light .hud-corner-bl::before,
+.light .hud-corner-br::after {
+  border-color: hsl(16 85% 50% / 0.5);
+}
+
+/* Corners are now simpler/cleaner */
+.hud-corner-tl::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid hsl(var(--primary) / 0.5);
+  border-left: 1px solid hsl(var(--primary) / 0.5);
+}
+
+.hud-corner-tr::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid hsl(var(--primary) / 0.5);
+  border-right: 1px solid hsl(var(--primary) / 0.5);
+}
+
+.hud-corner-bl::before {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 1px solid hsl(var(--primary) / 0.5);
+  border-left: 1px solid hsl(var(--primary) / 0.5);
+}
+
+.hud-corner-br::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 1px solid hsl(var(--primary) / 0.5);
+  border-right: 1px solid hsl(var(--primary) / 0.5);
+}
+
+.hud-text {
+  @apply font-mono uppercase tracking-widest text-[10px] text-muted-foreground;
+}
+
+/* Subtle pulse instead of aggressive scan line */
+.status-indicator {
+  @apply w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))] animate-pulse;
+}
+
+/* Claw Orchestrator Paradigm - Loop Animations */
+@keyframes loop-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loop-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes wheel-turn {
+  0% { stroke-dashoffset: 251.2; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes clay-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes intervention-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); }
+}
+
+.loop-spinning {
+  animation: loop-spin var(--spin-duration, 2s) linear infinite;
+}
+
+.loop-pulsing {
+  animation: loop-pulse 2s ease-in-out infinite;
+}
+
+.wheel-animating {
+  animation: wheel-turn var(--wheel-duration, 3s) linear infinite;
+}
+
+.clay-raw {
+  background: linear-gradient(90deg, transparent, rgba(107, 114, 128, 0.3), transparent);
+  background-size: 200% 100%;
+  animation: clay-shimmer 3s linear infinite;
+}
+
+.clay-polished {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 197, 94, 0.2));
+}
+
+.intervention-required {
+  animation: intervention-glow 1.5s ease-in-out infinite;
+}
+
+/* Autonomous indicator */
+.autonomous-badge {
+  @apply bg-emerald-500/10 border border-emerald-500/30 text-emerald-400;
+}
+
+.light .autonomous-badge {
+  @apply bg-emerald-600/15 border-emerald-700/50 text-emerald-700;
+}
+
+/* Intervention indicator */
+.intervention-badge {
+  @apply bg-amber-500/10 border border-amber-500/30 text-amber-400;
+}
+
+.light .intervention-badge {
+  @apply bg-orange-600/15 border-orange-700/50 text-orange-700;
+}
+
+/* Thread fork styling */
+.fork-point {
+  @apply relative before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-3 before:h-3 before:rounded-full before:bg-purple-500/30 before:border before:border-purple-500;
+}
+
+/* Speed bars */
+.speed-bar {
+  @apply h-1 rounded-full transition-all duration-300;
+}
+
+.speed-bar-fast { @apply bg-emerald-500; }
+.speed-bar-medium { @apply bg-amber-500; }
+.speed-bar-slow { @apply bg-red-500; }
+
+/* Refinement level textures */
+.refinement-raw {
+  background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(107, 114, 128, 0.1) 2px, rgba(107, 114, 128, 0.1) 4px);
+}
+
+.refinement-shaped {
+  background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(245, 158, 11, 0.1) 3px, rgba(245, 158, 11, 0.1) 6px);
+}
+
+.refinement-refined {
+  background: repeating-radial-gradient(circle at 50% 50%, transparent, transparent 2px, rgba(139, 92, 246, 0.1) 2px, rgba(139, 92, 246, 0.1) 3px);
+}
+
+.refinement-polished {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.05), rgba(34, 197, 94, 0.1));
+}
+
+/* Embedded Terminal Styles */
+.terminal-container {
+  @apply bg-[#0d0f12] border border-white/5 rounded-lg overflow-hidden;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+}
+
+.light .terminal-container {
+  @apply bg-[#1e1e2e] border-gray-300;
+}
+
+.terminal-compact {
+  @apply bg-[#0d0f12]/80 border border-white/5 rounded hover:bg-[#0d0f12] transition-colors;
+}
+
+.light .terminal-compact {
+  @apply bg-[#1e1e2e]/90 border-gray-300 hover:bg-[#1e1e2e];
+}
+
+.terminal-header {
+  @apply bg-[#151820];
+}
+
+.light .terminal-header {
+  @apply bg-[#2d2d3d];
+}
+
+.terminal-output {
+  @apply bg-[#0a0c0f];
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.light .terminal-output {
+  @apply bg-[#1e1e2e];
+}
+
+.terminal-output::-webkit-scrollbar {
+  width: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.terminal-input-container {
+  @apply bg-[#0d0f12];
+}
+
+.light .terminal-input-container {
+  @apply bg-[#1e1e2e];
+}
+
+.terminal-input {
+  caret-color: #34d399;
+}
+
+.terminal-input::placeholder {
+  @apply text-gray-600;
+}
+
+.terminal-line {
+  @apply py-0.5;
+}
+
+/* Terminal cursor blink animation */
+@keyframes terminal-cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: #34d399;
+  animation: terminal-cursor-blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 1px;
+}

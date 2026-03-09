@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "strict": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@openorca/core": ["./packages/core/src/index.ts"],
+      "@openorca/core/*": ["./packages/core/src/*"],
+      "@openorca/react": ["./packages/react/src/index.ts"],
+      "@openorca/react/*": ["./packages/react/src/*"],
+      "@openorca/theme": ["./packages/theme/src/index.ts"],
+      "@openorca/theme/*": ["./packages/theme/src/*"],
+      "@assets": ["./attached_assets"]
+    }
+  }
+}

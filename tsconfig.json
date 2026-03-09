@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "example/demo/src/App.tsx",
+    "example/demo/src/main.tsx",
+    "packages/*/src/**/*",
+    "vite.config.ts",
+    "vite-plugin-meta-images.ts"
+  ],
+  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
+    "noEmit": true
+  }
+}
