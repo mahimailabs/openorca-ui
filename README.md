@@ -117,9 +117,16 @@ npm install
 npm run check
 npm run build
 npm run dev
+npm run docs:dev
 ```
 
 The demo app is served through Vite and shows the same `OpenOrcaProvider` + `OpenOrcaDashboard` integration path documented above.
+
+The VitePress docs site lives in `docs/` and can be built with:
+
+```bash
+npm run docs:build
+```
 
 ## Example Consumer Shape
 
