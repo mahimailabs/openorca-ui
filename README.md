@@ -142,3 +142,7 @@ If you want more control than the full dashboard shell, start composing your own
 ## License
 
 MIT
+
+## Credits
+
+The idea was inspired from Ian's brilliant work - [OpenOrca](https://github.com/ianpilon/OpenOrca)
