@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 const API_KEY_STORAGE_KEY = 'loom_anthropic_api_key';
 
@@ -11,24 +11,19 @@ interface ApiKeyState {
 }
 
 export function useApiKey() {
-  const [state, setState] = useState<ApiKeyState>({
-    apiKey: null,
-    isConfigured: false,
-    isValidating: false,
-    validationError: null,
-    lastValidated: null,
-  });
+  const [state, setState] = useState<ApiKeyState>(() => {
+    const storedKey = typeof window !== 'undefined'
+      ? localStorage.getItem(API_KEY_STORAGE_KEY)
+      : null;
 
-  useEffect(() => {
-    const storedKey = localStorage.getItem(API_KEY_STORAGE_KEY);
-    if (storedKey) {
-      setState(prev => ({
-        ...prev,
-        apiKey: storedKey,
-        isConfigured: true,
-      }));
-    }
-  }, []);
+    return {
+      apiKey: storedKey,
+      isConfigured: Boolean(storedKey),
+      isValidating: false,
+      validationError: null,
+      lastValidated: null,
+    };
+  });
 
   const validateAndSaveKey = useCallback(async (key: string): Promise<boolean> => {
     if (!key.trim()) {

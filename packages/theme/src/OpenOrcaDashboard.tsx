@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { AgentVisualization } from '@openorca-ui/react/components/AgentVisualization';
 import { ActionTimeline } from '@openorca-ui/react/components/ActionTimeline';
 import { AgentStream } from '@openorca-ui/react/components/AgentStream';
@@ -41,8 +41,8 @@ export function OpenOrcaDashboard({
   runtimeConfig,
 }: OpenOrcaDashboardProps) {
   const [demoData, setDemoData] = useState<ClawOrchestratorData>(initialData);
-  const [selectedAgent, setSelectedAgent] = useState<ClawAgent | null>(null);
-  const [selectedTask, setSelectedTask] = useState<AgentTask | null>(null);
+  const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'active' | 'interventions'>('all');
   const [settingsOpen, setSettingsOpen] = useState(false);
   
@@ -60,21 +60,24 @@ export function OpenOrcaDashboard({
   );
   const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || DEFAULT_RUNTIME_LABEL;
 
-  useEffect(() => {
-    if (!selectedAgent) {
-      return;
+  const selectedAgent = useMemo(
+    () => data.agents.find((agent) => agent.id === selectedAgentId) || null,
+    [data.agents, selectedAgentId],
+  );
+  const selectedTask = useMemo(() => {
+    if (selectedTaskId) {
+      return data.tasks.find((task) => task.id === selectedTaskId) || null;
     }
 
-    const nextAgent = data.agents.find((agent) => agent.id === selectedAgent.id) || null;
-    setSelectedAgent(nextAgent);
-
-    if (nextAgent?.currentTaskId) {
-      const nextTask = data.tasks.find((task) => task.id === nextAgent.currentTaskId) || null;
-      setSelectedTask(nextTask);
-    } else {
-      setSelectedTask(null);
+    if (selectedAgent?.currentTaskId) {
+      return data.tasks.find((task) => task.id === selectedAgent.currentTaskId) || null;
     }
-  }, [data.agents, data.tasks, selectedAgent]);
+
+    return null;
+  }, [data.tasks, selectedAgent, selectedTaskId]);
+
+
+
 
   const activeCount = useMemo(() => 
     data.agents.filter(a => a.status === 'active').length, 
@@ -92,15 +95,15 @@ export function OpenOrcaDashboard({
   );
 
   const handleAgentSelect = useCallback((agent: ClawAgent) => {
-    setSelectedAgent(agent);
+    setSelectedAgentId(agent.id);
     const task = data.tasks.find(t => t.id === agent.currentTaskId);
-    setSelectedTask(task || null);
+    setSelectedTaskId(task?.id || null);
   }, [data.tasks]);
 
   const handleTaskSelect = useCallback((task: AgentTask) => {
-    setSelectedTask(task);
+    setSelectedTaskId(task.id);
     const agent = data.agents.find(a => a.id === task.agentId);
-    setSelectedAgent(agent || null);
+    setSelectedAgentId(agent?.id || null);
   }, [data.agents]);
 
   const handleResolveIntervention = useCallback((interventionId: string, action: 'approve' | 'deny' | 'later') => {
@@ -170,8 +173,8 @@ export function OpenOrcaDashboard({
   }, [mode]);
 
   const closeInspector = useCallback(() => {
-    setSelectedAgent(null);
-    setSelectedTask(null);
+    setSelectedAgentId(null);
+    setSelectedTaskId(null);
   }, []);
 
   const agentActions = useMemo(() => {

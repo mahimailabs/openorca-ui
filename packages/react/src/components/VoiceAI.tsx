@@ -126,6 +126,24 @@ export function VoiceAI({ peopleData, onPersonFound, currentConnections = [] }: 
     return int16Array;
   };
 
+  const playNextInQueue = useCallback(function playNextInQueue() {
+    if (audioQueueRef.current.length === 0) {
+      isPlayingRef.current = false;
+      return;
+    }
+
+    isPlayingRef.current = true;
+    const audioBuffer = audioQueueRef.current.shift() as unknown as AudioBuffer;
+
+    if (playbackContextRef.current) {
+      const source = playbackContextRef.current.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(playbackContextRef.current.destination);
+      source.onended = playNextInQueue;
+      source.start();
+    }
+  }, []);
+
   const playAudioChunk = useCallback(async (base64Audio: string) => {
     try {
       const binaryString = atob(base64Audio);
@@ -155,25 +173,7 @@ export function VoiceAI({ peopleData, onPersonFound, currentConnections = [] }: 
     } catch (err) {
       console.error('Audio playback error:', err);
     }
-  }, []);
-
-  const playNextInQueue = useCallback(() => {
-    if (audioQueueRef.current.length === 0) {
-      isPlayingRef.current = false;
-      return;
-    }
-
-    isPlayingRef.current = true;
-    const audioBuffer = audioQueueRef.current.shift() as unknown as AudioBuffer;
-
-    if (playbackContextRef.current) {
-      const source = playbackContextRef.current.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(playbackContextRef.current.destination);
-      source.onended = () => playNextInQueue();
-      source.start();
-    }
-  }, []);
+  }, [playNextInQueue]);
 
   const handleMessage = useCallback((event: MessageEvent) => {
     try {

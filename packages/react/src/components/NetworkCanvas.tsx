@@ -3,6 +3,15 @@ import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
 import { statusColors, convoyColors } from '@openorca-ui/react/lib/mockData';
 
+const CLUSTER_CENTERS: Record<number, {x: number, y: number, label: string, color: string}> = {
+  0: { x: -200, y: -100, label: 'Auth System Overhaul', color: convoyColors['convoy-auth'] },
+  1: { x: 200, y: -100, label: 'Performance Optimization', color: convoyColors['convoy-perf'] },
+  2: { x: -200, y: 100, label: 'UI Redesign', color: convoyColors['convoy-ui'] },
+  3: { x: 200, y: 100, label: 'API v2 Migration', color: convoyColors['convoy-api'] },
+  4: { x: 0, y: -200, label: 'Test Coverage', color: convoyColors['convoy-test'] },
+  5: { x: 0, y: 200, label: 'Documentation Update', color: convoyColors['convoy-docs'] },
+};
+
 interface NetworkCanvasProps {
   data: any;
   onNodeClick: (node: any) => void;
@@ -60,14 +69,7 @@ export function NetworkCanvas({ data, onNodeClick, filter, onZoomChange, selecte
     return { nodes: data.nodes, links: filteredLinks };
   }, [data, filter]);
 
-  const clusterCenters: Record<number, {x: number, y: number, label: string, color: string}> = {
-    0: { x: -200, y: -100, label: 'Auth System Overhaul', color: convoyColors['convoy-auth'] },
-    1: { x: 200, y: -100, label: 'Performance Optimization', color: convoyColors['convoy-perf'] },
-    2: { x: -200, y: 100, label: 'UI Redesign', color: convoyColors['convoy-ui'] },
-    3: { x: 200, y: 100, label: 'API v2 Migration', color: convoyColors['convoy-api'] },
-    4: { x: 0, y: -200, label: 'Test Coverage', color: convoyColors['convoy-test'] },
-    5: { x: 0, y: 200, label: 'Documentation Update', color: convoyColors['convoy-docs'] },
-  };
+
 
   // Configure Forces for "Cluster" layout - optimized for large datasets
   useEffect(() => {
@@ -80,7 +82,7 @@ export function NetworkCanvas({ data, onNodeClick, filter, onZoomChange, selecte
       const clusterForce = (alpha: number) => {
         data.nodes.forEach((node: any) => {
           const clusterId = node.clusterGroup || 0;
-          const target = clusterCenters[clusterId] || { x: 0, y: 0 };
+          const target = CLUSTER_CENTERS[clusterId] || { x: 0, y: 0 };
           
           node.vx += (target.x - node.x) * 1 * alpha;
           node.vy += (target.y - node.y) * 1 * alpha;
@@ -93,7 +95,7 @@ export function NetworkCanvas({ data, onNodeClick, filter, onZoomChange, selecte
       // Set initial zoom to 2.4x
       graphRef.current.zoom(2.4, 0);
     }
-  }, [graphRef.current, data]);
+  }, [data]);
 
   // Handle focus/zoom to a specific node from search
   useEffect(() => {
@@ -128,7 +130,7 @@ export function NetworkCanvas({ data, onNodeClick, filter, onZoomChange, selecte
     const padding = 6 / globalScale;
     const rectHeight = 18 / globalScale;
     
-    Object.values(clusterCenters).forEach(center => {
+    Object.values(CLUSTER_CENTERS).forEach(center => {
       const color = center.color || '#82cfff';
       
       // Draw Grid Marker - Subtle Circle (also scale with zoom)
