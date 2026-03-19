@@ -14,7 +14,7 @@ import {
   ClawAgent, 
   AgentTask,
 } from '@openorca-ui/core/clawData';
-import type { OpenOrcaConnectionStatus } from '@openorca-ui/core/runtime';
+import { DEFAULT_RUNTIME_LABEL, type OpenOrcaConnectionStatus } from '@openorca-ui/core/runtime';
 import { Button } from '@openorca-ui/react/components/ui/button';
 import { AnimatePresence } from 'framer-motion';
 import { 
@@ -58,7 +58,7 @@ export function OpenOrcaDashboard({
     () => (mode === 'runtime' && snapshot ? snapshot : demoData),
     [demoData, mode, snapshot],
   );
-  const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || 'runtime';
+  const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || DEFAULT_RUNTIME_LABEL;
 
   useEffect(() => {
     if (!selectedAgent) {

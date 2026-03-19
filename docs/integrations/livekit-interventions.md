@@ -21,7 +21,7 @@ The bridge should create a durable intervention record keyed by:
 
 ## Pending State Storage
 
-Store pending decisions in a bridge-side durable store so intervention state survives bridge restarts and duplicate UI requests. The stored record should include:
+Store pending decisions in a bridge-side durable store so intervention state survives bridge restarts and duplicate UI requests. These bridge-local fields are not part of the public `Intervention` interface exposed to the dashboard; they remain internal backend state used to manage resumes and retries. The stored record should include:
 
 - current status: `pending`, `approved`, `denied`, `deferred`, `expired`, or `orphaned`
 - timestamps for create, last update, and resolution

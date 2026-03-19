@@ -9,6 +9,8 @@ import type {
   Swarm,
 } from "./clawData";
 
+export const DEFAULT_RUNTIME_LABEL = "runtime";
+
 export type OpenOrcaConnectionStatus =
   | "idle"
   | "loading"
@@ -169,7 +171,7 @@ export function createRuntimeSnapshot(
   return {
     ...data,
     meta: {
-      runtime: "runtime",
+      runtime: DEFAULT_RUNTIME_LABEL,
       generatedAt: new Date().toISOString(),
       connectionStatus: "connected",
       ...overrides,

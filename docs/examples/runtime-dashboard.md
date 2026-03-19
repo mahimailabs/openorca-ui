@@ -27,12 +27,12 @@ export default function App() {
 
 ## Expected `runtimeConfig`
 
-Use these endpoints for a bridge-backed LiveKit deployment:
+Use these endpoints for a bridge-backed LiveKit deployment. `runtimeInfoUrl` is optional; the dashboard can still operate in runtime mode without it:
 
 - `snapshotUrl`: returns the current `OpenOrcaSnapshot`
 - `eventsUrl`: streams `OpenOrcaEvent` payloads over SSE
 - `resolveInterventionUrl`: accepts `approve`, `deny`, and `later`
-- `runtimeInfoUrl`: returns runtime metadata with `runtime: "livekit-agents"`
+- `runtimeInfoUrl` (optional): returns runtime metadata with `runtime: "livekit-agents"`
 
 ## End-to-End Scenario
 
