@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "OpenOrca UI",
   description: "React packages for building agent operations dashboards and runtime control planes.",
+  base: "/openorca-ui/",
   cleanUrls: true,
   themeConfig: {
     nav: [

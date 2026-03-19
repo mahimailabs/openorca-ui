@@ -128,6 +128,10 @@ The VitePress docs site lives in `docs/` and can be built with:
 npm run docs:build
 ```
 
+The VitePress site is configured with a GitHub Pages base path of `/openorca-ui/`.
+Deployments should run from GitHub Actions using the workflow in `.github/workflows/deploy-docs.yml`, which builds `docs/.vitepress/dist`.
+In the repository Pages settings, set the deployment source to **GitHub Actions**.
+
 ## Example Consumer Shape
 
 The included demo uses the same pattern you should use in your own app:
