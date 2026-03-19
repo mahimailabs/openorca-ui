@@ -44,10 +44,18 @@ type OpenOrcaEvent =
   | { type: "task.created"; task: AgentTask }
   | { type: "action.logged"; action: ActionEntry }
   | { type: "intervention.created"; intervention: Intervention }
-  | { type: "intervention.resolved"; interventionId: string; resolution: "approve" | "deny" | "later" }
+  | {
+      type: "intervention.resolved";
+      interventionId: string;
+      resolution: "approve" | "deny" | "later";
+    }
   | { type: "swarm.updated"; swarm: Swarm }
   | { type: "fleet.updated"; fleetHealth: FleetHealth }
-  | { type: "runtime.status"; status: "connected" | "degraded" | "disconnected"; message?: string };
+  | {
+      type: "runtime.status";
+      status: "connected" | "degraded" | "disconnected";
+      message?: string;
+    };
 ```
 
 ## Helpers

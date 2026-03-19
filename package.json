@@ -21,7 +21,12 @@
     "docs:build": "npm run build --workspace @openorca-ui/docs",
     "docs:preview": "npm run preview --workspace @openorca-ui/docs",
     "preview": "vite preview --config vite.config.ts --host 0.0.0.0 --port 5000",
-    "check": "tsc"
+    "check": "tsc",
+    "lint": "eslint \"packages/**/*.{ts,tsx}\" \"example/**/*.{ts,tsx}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -95,7 +100,17 @@
     "tailwindcss": "^4.1.14",
     "tsup": "^8.5.1",
     "typescript": "5.6.3",
-    "vite": "^7.1.9"
+    "vite": "^7.1.9",
+    "@eslint/js": "^9.23.0",
+    "@testing-library/react": "^16.3.0",
+    "eslint": "^9.23.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
+    "jsdom": "^26.0.0",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.28.0",
+    "vitest": "^3.1.1",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"

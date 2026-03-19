@@ -2,7 +2,8 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   title: "OpenOrca UI",
-  description: "React packages for building agent operations dashboards and runtime control planes.",
+  description:
+    "React packages for building agent operations dashboards and runtime control planes.",
   base: "/openorca-ui/",
   cleanUrls: true,
   themeConfig: {
@@ -21,8 +22,14 @@ export default defineConfig({
           items: [
             { text: "Overview", link: "/getting-started/" },
             { text: "Installation", link: "/getting-started/installation" },
-            { text: "First Dashboard", link: "/getting-started/first-dashboard" },
-            { text: "Demo vs Runtime", link: "/getting-started/demo-vs-runtime" },
+            {
+              text: "First Dashboard",
+              link: "/getting-started/first-dashboard",
+            },
+            {
+              text: "Demo vs Runtime",
+              link: "/getting-started/demo-vs-runtime",
+            },
           ],
         },
       ],
@@ -40,7 +47,10 @@ export default defineConfig({
         {
           text: "Guides",
           items: [
-            { text: "Compose a Custom Dashboard", link: "/guides/compose-custom-dashboard" },
+            {
+              text: "Compose a Custom Dashboard",
+              link: "/guides/compose-custom-dashboard",
+            },
             { text: "Styling and Theme", link: "/guides/styling-and-theme" },
             { text: "Data Model", link: "/guides/data-model" },
             { text: "Runtime Mode", link: "/guides/runtime-mode" },
@@ -52,8 +62,14 @@ export default defineConfig({
           text: "Integrations",
           items: [
             { text: "Overview", link: "/integrations/overview" },
-            { text: "Runtime Bridge Contract", link: "/integrations/runtime-bridge-contract" },
-            { text: "LangGraph Python", link: "/integrations/langgraph-python" },
+            {
+              text: "Runtime Bridge Contract",
+              link: "/integrations/runtime-bridge-contract",
+            },
+            {
+              text: "LangGraph Python",
+              link: "/integrations/langgraph-python",
+            },
           ],
         },
       ],

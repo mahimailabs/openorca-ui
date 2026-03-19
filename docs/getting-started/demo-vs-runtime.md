@@ -26,7 +26,8 @@ Use runtime mode when you want the dashboard driven by a real backend bridge:
   runtimeConfig={{
     snapshotUrl: "http://localhost:8000/openorca/snapshot",
     eventsUrl: "http://localhost:8000/openorca/events",
-    resolveInterventionUrl: "http://localhost:8000/openorca/interventions/resolve",
+    resolveInterventionUrl:
+      "http://localhost:8000/openorca/interventions/resolve",
     runtimeInfoUrl: "http://localhost:8000/openorca/runtime",
   }}
 />
