@@ -26,7 +26,8 @@ Use runtime mode when you want the dashboard driven by a real backend bridge:
   runtimeConfig={{
     snapshotUrl: "http://localhost:8000/openorca/snapshot",
     eventsUrl: "http://localhost:8000/openorca/events",
-    resolveInterventionUrl: "http://localhost:8000/openorca/interventions/resolve",
+    resolveInterventionUrl:
+      "http://localhost:8000/openorca/interventions/resolve",
     runtimeInfoUrl: "http://localhost:8000/openorca/runtime",
   }}
 />
@@ -38,4 +39,4 @@ Runtime mode expects:
 - live updates over Server-Sent Events
 - a POST endpoint for intervention resolution
 
-See [Runtime Mode](/guides/runtime-mode) and [LangGraph Python](/integrations/langgraph-python).
+See [Runtime Mode](/guides/runtime-mode), [Runtime Bridge Contract](/integrations/runtime-bridge-contract), and [LiveKit Agents](/integrations/livekit-agents).

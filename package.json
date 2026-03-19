@@ -21,7 +21,12 @@
     "docs:build": "npm run build --workspace @openorca-ui/docs",
     "docs:preview": "npm run preview --workspace @openorca-ui/docs",
     "preview": "vite preview --config vite.config.ts --host 0.0.0.0 --port 5000",
-    "check": "tsc"
+    "check": "tsc",
+    "lint": "eslint \"packages/**/*.{ts,tsx}\" \"example/**/*.{ts,tsx}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -82,20 +87,31 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@replit/vite-plugin-cartographer": "^0.4.4",
     "@replit/vite-plugin-dev-banner": "^0.1.1",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.4",
     "@tailwindcss/vite": "^4.1.14",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
+    "baseline-browser-mapping": "^2.10.9",
+    "eslint": "^9.23.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.0.0",
+    "jsdom": "^26.0.0",
     "postcss": "^8.5.6",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4.1.14",
     "tsup": "^8.5.1",
     "typescript": "5.6.3",
-    "vite": "^7.1.9"
+    "typescript-eslint": "^8.28.0",
+    "vite": "^7.1.9",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"

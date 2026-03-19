@@ -30,31 +30,25 @@ export function LoopStream({
   selectedLoopId,
 }: LoopStreamProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [streamItems, setStreamItems] = useState<StreamItem[]>([]);
+  const [animationTick, setAnimationTick] = useState(0);
   const [terminalLoopId, setTerminalLoopId] = useState<string | null>(null);
 
   useEffect(() => {
-    setStreamItems(
-      loops.map(loop => ({
-        loop,
-        animatedSpeed: loop.wheelSpeed,
-      }))
-    );
-  }, [loops]);
-
-  useEffect(() => {
     const interval = setInterval(() => {
-      setStreamItems(items =>
-        items.map(item => ({
-          ...item,
-          animatedSpeed: item.loop.status === 'spinning'
-            ? item.loop.wheelSpeed + (Math.random() - 0.5) * 10
-            : item.animatedSpeed,
-        }))
-      );
+      setAnimationTick((tick) => tick + 1);
     }, 500);
     return () => clearInterval(interval);
   }, []);
+
+  const streamItems = useMemo(() => {
+    return loops.map((loop) => ({
+      loop,
+      animatedSpeed:
+        loop.status === 'spinning'
+          ? loop.wheelSpeed + (Math.sin(animationTick + loop.wheelSpeed) * 5)
+          : loop.wheelSpeed,
+    }));
+  }, [animationTick, loops]);
 
   const sortedItems = useMemo(() => {
     return [...streamItems].sort((a, b) => {

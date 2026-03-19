@@ -37,7 +37,7 @@ function useOpenOrcaRuntime(config?: OpenOrcaRuntimeConfig): {
   status: OpenOrcaConnectionStatus;
   error?: string;
   resolveIntervention: (request: ResolveInterventionRequest) => Promise<void>;
-}
+};
 ```
 
 Use this hook when you want runtime mode without the full `OpenOrcaDashboard` shell.

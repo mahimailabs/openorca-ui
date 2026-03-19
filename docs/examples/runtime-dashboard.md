@@ -1,6 +1,6 @@
 # Runtime Dashboard Example
 
-This example assumes you already have a bridge service exposing the OpenOrca runtime contract.
+This example assumes you already have a bridge service exposing the OpenOrca runtime contract for a LiveKit Agents backend.
 
 ## `src/App.tsx`
 
@@ -15,7 +15,8 @@ export default function App() {
         runtimeConfig={{
           snapshotUrl: "http://localhost:8000/openorca/snapshot",
           eventsUrl: "http://localhost:8000/openorca/events",
-          resolveInterventionUrl: "http://localhost:8000/openorca/interventions/resolve",
+          resolveInterventionUrl:
+            "http://localhost:8000/openorca/interventions/resolve",
           runtimeInfoUrl: "http://localhost:8000/openorca/runtime",
         }}
       />
@@ -24,10 +25,24 @@ export default function App() {
 }
 ```
 
-## Expected Backend Behavior
+## Expected `runtimeConfig`
 
-- return one current snapshot
-- stream runtime updates over SSE
-- accept intervention commands from the operator UI
+Use these endpoints for a bridge-backed LiveKit deployment. `runtimeInfoUrl` is optional; the dashboard can still operate in runtime mode without it:
 
-See [Runtime Bridge Contract](/integrations/runtime-bridge-contract).
+- `snapshotUrl`: returns the current `OpenOrcaSnapshot`
+- `eventsUrl`: streams `OpenOrcaEvent` payloads over SSE
+- `resolveInterventionUrl`: accepts `approve`, `deny`, and `later`
+- `runtimeInfoUrl` (optional): returns runtime metadata with `runtime: "livekit-agents"`
+
+## End-to-End Scenario
+
+A typical operator flow looks like this:
+
+1. The dashboard loads a LiveKit-backed snapshot and shows `runtime: "livekit-agents"`.
+2. A new task appears as the bridge emits `task.created`.
+3. Tool activity and workflow progress stream into the action log through `action.logged` and `task.updated` events.
+4. The bridge emits `intervention.created` when the runtime pauses for an operator decision.
+5. The operator sends `approve`, `deny`, or `later` through `POST /openorca/interventions/resolve`.
+6. The bridge resumes or terminates the underlying workflow and emits the follow-up task and intervention updates.
+
+See [Runtime Bridge Contract](/integrations/runtime-bridge-contract), [LiveKit Agents](/integrations/livekit-agents), and [LiveKit Intervention Lifecycle](/integrations/livekit-interventions).

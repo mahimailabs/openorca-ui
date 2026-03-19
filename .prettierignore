@@ -1,0 +1,18 @@
+node_modules
+build
+dist
+coverage
+docs/.vitepress/dist
+docs/.vitepress/cache
+packages/*/dist
+
+# Legacy source formatting can be adopted incrementally.
+README.md
+vite-plugin-meta-images.ts
+vite.config.ts
+example/server/**
+packages/core/src/**
+!packages/core/src/__tests__/**
+packages/react/src/**
+!packages/react/src/hooks/__tests__/**
+packages/theme/src/**

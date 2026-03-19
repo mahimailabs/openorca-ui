@@ -4,7 +4,7 @@ layout: home
 hero:
   name: OpenOrca UI
   text: Agent operations UI for React
-  tagline: Build branded operator dashboards, run in demo mode, or connect a runtime bridge such as LangGraph in Python.
+  tagline: Build branded operator dashboards, run in demo mode, or connect a runtime bridge such as LiveKit Agents.
   actions:
     - theme: brand
       text: Get Started
@@ -49,4 +49,4 @@ OpenOrca is the UI layer, not the runtime. In runtime mode, the dashboard expect
 - an SSE event stream
 - an intervention command endpoint
 
-LangGraph in Python is the first documented example, but the contracts are runtime-agnostic.
+LiveKit Agents is the primary documented backend path, but the contracts remain runtime-agnostic so any bridge can target the same UI surface.

@@ -9,6 +9,8 @@ import type {
   Swarm,
 } from "./clawData";
 
+export const DEFAULT_RUNTIME_LABEL = "runtime";
+
 export type OpenOrcaConnectionStatus =
   | "idle"
   | "loading"
@@ -19,7 +21,7 @@ export type OpenOrcaConnectionStatus =
 
 export interface OpenOrcaSnapshot extends ClawOrchestratorData {
   meta: {
-    runtime: "langgraph" | string;
+    runtime: string;
     runtimeVersion?: string;
     generatedAt: string;
     connectionStatus: Exclude<OpenOrcaConnectionStatus, "idle" | "loading" | "error">;
@@ -57,7 +59,7 @@ export interface ResolveInterventionRequest {
 }
 
 export interface OpenOrcaRuntimeInfo {
-  runtime: "langgraph" | string;
+  runtime: string;
   language: "python" | "javascript" | "typescript" | string;
   supports: {
     sse: boolean;
@@ -169,7 +171,7 @@ export function createRuntimeSnapshot(
   return {
     ...data,
     meta: {
-      runtime: "langgraph",
+      runtime: DEFAULT_RUNTIME_LABEL,
       generatedAt: new Date().toISOString(),
       connectionStatus: "connected",
       ...overrides,

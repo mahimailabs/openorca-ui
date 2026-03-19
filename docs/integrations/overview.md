@@ -16,11 +16,14 @@ The bridge is responsible for:
 - streaming `OpenOrcaEvent` updates
 - accepting intervention commands from the UI
 
-## First Documented Runtime
+## Primary Documented Runtime
 
-LangGraph in Python is the first documented runtime because it matches the stateful, human-in-the-loop workflow shape that OpenOrca visualizes well.
+LiveKit Agents is the primary documented backend integration because it fits OpenOrca's real-time, human-in-the-loop operator model while keeping the frontend transport stable.
 
 See:
 
 - [Runtime Bridge Contract](/integrations/runtime-bridge-contract)
-- [LangGraph Python](/integrations/langgraph-python)
+- [LiveKit Agents](/integrations/livekit-agents)
+- [LiveKit Migration Architecture Decision](/integrations/livekit-migration-architecture)
+- [LiveKit Mapping Spec](/integrations/livekit-mapping)
+- [LiveKit Intervention Lifecycle](/integrations/livekit-interventions)
