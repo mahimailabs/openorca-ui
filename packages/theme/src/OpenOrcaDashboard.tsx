@@ -58,7 +58,7 @@ export function OpenOrcaDashboard({
     () => (mode === 'runtime' && snapshot ? snapshot : demoData),
     [demoData, mode, snapshot],
   );
-  const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || 'langgraph';
+  const runtimeLabel = runtimeInfo?.runtime || snapshot?.meta.runtime || 'runtime';
 
   useEffect(() => {
     if (!selectedAgent) {
