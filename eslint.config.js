@@ -36,6 +36,20 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+    },
+  },
+  {
+    files: [
+      "example/**/*.ts",
+      "example/**/*.tsx",
+      "packages/**/*.test.ts",
+      "packages/**/*.test.tsx",
+      "packages/**/__tests__/**/*.ts",
+      "packages/**/__tests__/**/*.tsx",
+    ],
+    rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off",
     },

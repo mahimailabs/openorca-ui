@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { ClawOrchestratorData } from "../clawData";
-import {
-  applyOpenOrcaEvent,
-  createRuntimeSnapshot,
-  type OpenOrcaSnapshot,
-} from "../runtime";
+import { applyOpenOrcaEvent, createRuntimeSnapshot } from "../runtime";
 
 function createData(): ClawOrchestratorData {
   return {
@@ -126,7 +122,7 @@ describe("applyOpenOrcaEvent", () => {
   });
 
   it("marks agent intervention state when interventions are created and resolved", () => {
-    const snapshot = createRuntimeSnapshot(createData()) as OpenOrcaSnapshot;
+    const snapshot = createRuntimeSnapshot(createData());
 
     const withIntervention = applyOpenOrcaEvent(snapshot, {
       type: "intervention.created",
