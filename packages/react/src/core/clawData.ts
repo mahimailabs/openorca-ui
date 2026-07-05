@@ -44,6 +44,8 @@ export interface ClawAgent {
   knowledgeContributions: number;  // Nodes added to knowledge graph
   lastGraphQuery?: string;         // Last query to knowledge graph
   graphAccess: 'read' | 'write' | 'admin';
+  // Cost (VoiceGateway): cumulative spend attributed to this agent, in USD.
+  spendUsd?: number;
 }
 
 // Task assigned to an agent
@@ -61,6 +63,7 @@ export interface AgentTask {
   estimatedCompletion?: string;
   integrationsUsed: Integration[];
   collaborators: string[]; // Other agent IDs working on this
+  costUsd?: number; // Cost of this task/call so far, in USD (VoiceGateway).
 }
 
 // Action log entry - what the agent has done
@@ -112,6 +115,7 @@ export interface FleetHealth {
   tasksCompletedToday: number;
   swarmsActive: number;
   overallHealth: 'healthy' | 'degraded' | 'critical';
+  totalSpendUsd?: number; // Fleet-wide spend today, in USD (VoiceGateway).
 }
 
 // Color system for Claw Orchestrator
@@ -325,6 +329,7 @@ function generateAgent(machine: Machine, domain: AgentDomain): ClawAgent {
       undefined,
     ]) : undefined,
     graphAccess: randomItem(['read', 'read', 'write', 'write', 'admin']),
+    spendUsd: Math.round(randomInt(50, 8000)) / 100,
   };
 }
 
@@ -345,6 +350,7 @@ function generateTask(agent: ClawAgent): AgentTask {
     estimatedCompletion: status !== 'completed' ? `${randomInt(5, 60)}m` : undefined,
     integrationsUsed: agent.integrations.slice(0, randomInt(1, 3)),
     collaborators: [],
+    costUsd: Math.round(randomInt(5, 600)) / 100,
   };
 }
 
@@ -499,6 +505,7 @@ export function generateClawData(): ClawOrchestratorData {
     tasksCompletedToday: randomInt(20, 100),
     swarmsActive: swarms.filter(s => s.status === 'active').length,
     overallHealth: interventionsRequired > 3 ? 'critical' : interventionsRequired > 1 ? 'degraded' : 'healthy',
+    totalSpendUsd: Math.round(agents.reduce((s, a) => s + (a.spendUsd ?? 0), 0) * 100) / 100,
   };
   
   return {
