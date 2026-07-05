@@ -33,6 +33,8 @@ export function useOpenOrcaRuntime(
   );
   const [error, setError] = useState<string>();
   const eventSourceRef = useRef<EventSource | null>(null);
+  const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const attemptRef = useRef(0);
 
   const stableConfig = useMemo(() => config, [config]);
 
@@ -68,9 +70,17 @@ export function useOpenOrcaRuntime(
     }
 
     let isMounted = true;
+    attemptRef.current = 0;
 
-    const loadSnapshot = async () => {
-      setStatus("loading");
+    // Capped exponential backoff: 1000 * 2**attempt, ceiling at 5000ms.
+    const backoffMs = () => Math.min(5000, 1000 * 2 ** attemptRef.current);
+
+    const loadSnapshot = async (isInitial: boolean) => {
+      // Only flip to "loading" on the first connect. Backoff reconnects keep
+      // the current badge so a resync does not churn the connection state.
+      if (isInitial) {
+        setStatus("loading");
+      }
       setError(undefined);
 
       try {
@@ -106,7 +116,9 @@ export function useOpenOrcaRuntime(
         if (!isMounted) {
           return;
         }
-        setStatus("error");
+        // A transient re-fetch failure while already connected degrades the
+        // badge rather than hard-erroring, so a healthy stream survives it.
+        setStatus((current) => (current === "connected" ? "degraded" : "error"));
         setError(
           runtimeError instanceof Error
             ? runtimeError.message
@@ -115,63 +127,88 @@ export function useOpenOrcaRuntime(
       }
     };
 
-    void loadSnapshot();
-
-    eventSourceRef.current?.close();
-    const source = new EventSource(stableConfig.eventsUrl);
-    eventSourceRef.current = source;
-
-    source.onopen = () => {
-      if (isMounted) {
-        setStatus("connected");
-      }
-    };
-
-    source.onmessage = (message) => {
+    const connect = (isInitial: boolean) => {
       if (!isMounted) {
         return;
       }
 
-      try {
-        const event = JSON.parse(message.data) as OpenOrcaEvent;
-        setSnapshot((currentSnapshot) =>
-          currentSnapshot
-            ? applyOpenOrcaEvent(currentSnapshot, event)
-            : event.type === "snapshot.replace"
-              ? event.snapshot
-              : currentSnapshot,
-        );
+      // Re-fetch the snapshot on every (re)connect so state resyncs from truth.
+      void loadSnapshot(isInitial);
 
-        if (event.type === "runtime.status") {
-          setStatus(event.status);
+      eventSourceRef.current?.close();
+      const source = new EventSource(stableConfig.eventsUrl);
+      eventSourceRef.current = source;
+
+      source.onopen = () => {
+        if (!isMounted) {
+          return;
         }
-      } catch (parseError) {
-        setStatus("degraded");
-        setError(
-          parseError instanceof Error
-            ? parseError.message
-            : "Failed to process runtime event.",
+        attemptRef.current = 0;
+        setStatus("connected");
+      };
+
+      source.onmessage = (message) => {
+        if (!isMounted) {
+          return;
+        }
+
+        try {
+          const event = JSON.parse(message.data) as OpenOrcaEvent;
+          setSnapshot((currentSnapshot) =>
+            currentSnapshot
+              ? applyOpenOrcaEvent(currentSnapshot, event)
+              : event.type === "snapshot.replace"
+                ? event.snapshot
+                : currentSnapshot,
+          );
+
+          // runtime.status frames double as keepalives: refresh the badge
+          // without any further state churn.
+          if (event.type === "runtime.status") {
+            setStatus(event.status);
+          }
+        } catch (parseError) {
+          setStatus("degraded");
+          setError(
+            parseError instanceof Error
+              ? parseError.message
+              : "Failed to process runtime event.",
+          );
+        }
+      };
+
+      source.onerror = () => {
+        if (!isMounted) {
+          return;
+        }
+
+        setStatus((currentStatus) =>
+          currentStatus === "loading" ? "error" : "degraded",
         );
-      }
+        setError("Lost connection to the runtime event stream.");
+
+        source.close();
+        if (eventSourceRef.current === source) {
+          eventSourceRef.current = null;
+        }
+
+        // Schedule a reconnect with capped backoff, then widen the window.
+        const delay = backoffMs();
+        attemptRef.current += 1;
+        retryTimerRef.current = setTimeout(() => connect(false), delay);
+      };
     };
 
-    source.onerror = () => {
-      if (!isMounted) {
-        return;
-      }
-
-      setStatus((currentStatus) =>
-        currentStatus === "loading" ? "error" : "degraded",
-      );
-      setError("Lost connection to the runtime event stream.");
-    };
+    connect(true);
 
     return () => {
       isMounted = false;
-      source.close();
-      if (eventSourceRef.current === source) {
-        eventSourceRef.current = null;
+      if (retryTimerRef.current) {
+        clearTimeout(retryTimerRef.current);
+        retryTimerRef.current = null;
       }
+      eventSourceRef.current?.close();
+      eventSourceRef.current = null;
     };
   }, [stableConfig]);
 
