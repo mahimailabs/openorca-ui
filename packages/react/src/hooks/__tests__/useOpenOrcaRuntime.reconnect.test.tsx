@@ -20,6 +20,10 @@ class MockEventSource {
     MockEventSource.instances.push(this);
   }
 
+  emitOpen() {
+    this.onopen?.();
+  }
+
   emitError() {
     this.onerror?.();
   }
@@ -74,7 +78,7 @@ function createConfig() {
 // is the reliable way to flush the async snapshot load.
 async function flushMicrotasks() {
   await act(async () => {
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < 12; i += 1) {
       await Promise.resolve();
     }
   });
@@ -106,7 +110,7 @@ describe("useOpenOrcaRuntime reconnect", () => {
   it("reconnects after a stream error and re-fetches the snapshot to resync", async () => {
     const fetchSpy = vi.mocked(fetch);
     const config = createConfig();
-    renderHook(() => useOpenOrcaRuntime(config));
+    const { result } = renderHook(() => useOpenOrcaRuntime(config));
 
     // Initial connect: one snapshot fetch and one EventSource.
     await flushMicrotasks();
@@ -133,5 +137,88 @@ describe("useOpenOrcaRuntime reconnect", () => {
     await flushMicrotasks();
     expect(fetchSpy.mock.calls.length).toBeGreaterThan(1);
     expect(MockEventSource.instances.length).toBeGreaterThan(1);
+
+    // The resync fetch repopulates snapshot state; opening the reconnected
+    // stream marks the badge connected and the snapshot reflects the runtime.
+    act(() => {
+      MockEventSource.latest().emitOpen();
+    });
+    expect(result.current.status).toBe("connected");
+    expect(result.current.snapshot).not.toBeNull();
+    expect(result.current.snapshot?.meta.runtime).toBe("voicegateway");
+  });
+
+  it("resets the backoff to 1000ms after a successful reconnect", async () => {
+    const fetchSpy = vi.mocked(fetch);
+    const config = createConfig();
+    renderHook(() => useOpenOrcaRuntime(config));
+
+    await flushMicrotasks();
+    expect(MockEventSource.instances.length).toBe(1);
+
+    // First drop schedules a 1000ms backoff reconnect.
+    act(() => {
+      MockEventSource.latest().emitError();
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1000);
+    });
+    await flushMicrotasks();
+    expect(MockEventSource.instances.length).toBe(2);
+
+    // The reconnected stream opens successfully, resetting the attempt counter.
+    act(() => {
+      MockEventSource.latest().emitOpen();
+    });
+
+    const fetchesBeforeSecondDrop = fetchSpy.mock.calls.length;
+
+    // Second drop. Because the counter reset, the next backoff is 1000ms again
+    // (not 2000ms as it would be without the reset).
+    act(() => {
+      MockEventSource.latest().emitError();
+    });
+
+    // At 900ms the reconnect has not fired yet.
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(900);
+    });
+    expect(MockEventSource.instances.length).toBe(2);
+    expect(fetchSpy.mock.calls.length).toBe(fetchesBeforeSecondDrop);
+
+    // Crossing 1000ms total fires it, proving the backoff reset to 1000ms.
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
+    });
+    await flushMicrotasks();
+    expect(MockEventSource.instances.length).toBe(3);
+    expect(fetchSpy.mock.calls.length).toBeGreaterThan(fetchesBeforeSecondDrop);
+  });
+
+  it("cancels a pending retry timer on unmount", async () => {
+    const fetchSpy = vi.mocked(fetch);
+    const config = createConfig();
+    const { unmount } = renderHook(() => useOpenOrcaRuntime(config));
+
+    await flushMicrotasks();
+    const fetchesAfterConnect = fetchSpy.mock.calls.length;
+    expect(MockEventSource.instances.length).toBe(1);
+
+    // A drop schedules a backoff reconnect.
+    act(() => {
+      MockEventSource.latest().emitError();
+    });
+
+    // Unmounting must clear the pending retry timer.
+    unmount();
+
+    // Advancing well past the backoff window does nothing: no extra snapshot
+    // fetch and no new EventSource are created.
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5000);
+    });
+    await flushMicrotasks();
+    expect(fetchSpy.mock.calls.length).toBe(fetchesAfterConnect);
+    expect(MockEventSource.instances.length).toBe(1);
   });
 });
