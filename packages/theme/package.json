@@ -1,6 +1,16 @@
 {
   "name": "@openorca-ui/theme",
   "version": "0.0.1",
+  "description": "Branded dashboard shell and provider composition for OpenOrca UI.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahimailabs/openorca-ui.git",
+    "directory": "packages/theme"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,6 +20,10 @@
   ],
   "scripts": {
     "build": "tsup --config tsup.config.ts"
+  },
+  "dependencies": {
+    "@openorca-ui/core": "0.0.1",
+    "@openorca-ui/react": "0.0.1"
   },
   "peerDependencies": {
     "react": "^19.0.0",
