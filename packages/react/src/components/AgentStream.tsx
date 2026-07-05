@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ClawAgent, AgentTask, domainColors, integrationIcons } from '@openorca-ui/core/clawData';
+import { ClawAgent, AgentTask, domainColors, integrationIcons } from '@openorca-ui/react/core/clawData';
 import { Button } from '@openorca-ui/react/components/ui/button';
 import { Play, Pause, ChevronDown, ChevronUp } from 'lucide-react';
 import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';

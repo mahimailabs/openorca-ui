@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ClawAgent, AgentTask, ActionEntry, domainColors, integrationIcons } from '@openorca-ui/core/clawData';
+import { ClawAgent, AgentTask, ActionEntry, domainColors, integrationIcons } from '@openorca-ui/react/core/clawData';
 import { Button } from '@openorca-ui/react/components/ui/button';
 import { Badge } from '@openorca-ui/react/components/ui/badge';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@openorca-ui/react/components/ui/collapsible';

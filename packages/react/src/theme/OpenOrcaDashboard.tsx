@@ -13,8 +13,8 @@ import {
   ClawOrchestratorData, 
   ClawAgent, 
   AgentTask,
-} from '@openorca-ui/core/clawData';
-import { DEFAULT_RUNTIME_LABEL, type OpenOrcaConnectionStatus } from '@openorca-ui/core/runtime';
+} from '@openorca-ui/react/core/clawData';
+import { DEFAULT_RUNTIME_LABEL, type OpenOrcaConnectionStatus } from '@openorca-ui/react/core/runtime';
 import { Button } from '@openorca-ui/react/components/ui/button';
 import { AnimatePresence } from 'framer-motion';
 import { 

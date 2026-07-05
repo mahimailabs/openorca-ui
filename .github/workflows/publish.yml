@@ -1,4 +1,4 @@
-name: Publish npm packages
+name: Publish npm package
 
 on:
   push:
@@ -23,55 +23,49 @@ jobs:
     environment: npm
     permissions:
       contents: read
-      id-token: write # npm provenance (requires a public repo and npm >= 9.5)
+      id-token: write # OIDC trusted publishing (no npm token is stored)
 
     steps:
       # Third-party actions are pinned to immutable commit SHAs (the trailing
       # comment records the human-readable version), matching ci.yml. Floating
-      # tag refs are a supply-chain risk on a workflow that holds a publish token.
+      # tag refs are a supply-chain risk on a workflow that publishes to npm.
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
+      # Node 24 ships an npm (>= 11.5.1) new enough for OIDC trusted publishing;
+      # OIDC needs npm >= 11.5.1 and Node >= 22.14. registry-url must be set.
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: "https://registry.npmjs.org"
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build packages (core -> react -> theme)
+      - name: Build the package
         run: npm run build:packages
 
-      - name: Set versions from the tag
+      - name: Set version from the tag
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
-          echo "Releasing @openorca-ui/* at $VERSION"
-          for pkg in core react theme; do
-            npm version "$VERSION" --no-git-tag-version --workspace "@openorca-ui/$pkg"
-          done
-          # Pin the interdependency ranges to this exact release so the published
-          # graph is internally consistent (lockstep versioning).
-          npm pkg set "dependencies.@openorca-ui/core=$VERSION" --workspace @openorca-ui/react
-          npm pkg set "dependencies.@openorca-ui/core=$VERSION" --workspace @openorca-ui/theme
-          npm pkg set "dependencies.@openorca-ui/react=$VERSION" --workspace @openorca-ui/theme
+          echo "Releasing @openorca-ui/react at $VERSION"
+          npm version "$VERSION" --no-git-tag-version --workspace @openorca-ui/react
 
-      - name: Publish (idempotent, ordered core -> react -> theme)
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Auth is via OIDC trusted publishing: configure the trusted publisher on
+      # npmjs.com for @openorca-ui/react (repo mahimailabs/openorca-ui, workflow
+      # publish.yml, environment npm). No NPM_TOKEN is used, and provenance is
+      # generated automatically (no --provenance flag needed).
+      - name: Publish (idempotent)
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
-          for pkg in core react theme; do
-            name="@openorca-ui/$pkg"
-            if npm view "$name@$VERSION" version >/dev/null 2>&1; then
-              echo "$name@$VERSION already published, skipping"
-            else
-              npm publish --workspace "$name" --provenance --access public
-            fi
-          done
+          if npm view "@openorca-ui/react@$VERSION" version >/dev/null 2>&1; then
+            echo "@openorca-ui/react@$VERSION already published, skipping"
+          else
+            npm publish --workspace @openorca-ui/react --access public
+          fi
