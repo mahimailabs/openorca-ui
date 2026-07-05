@@ -1,5 +1,7 @@
 # `@openorca-ui/react`
 
+> `@openorca-ui/react` is now the single published package for the whole library. The runtime contracts live at the `@openorca-ui/react/runtime` (and `@openorca-ui/react/core`) subpath, and the branded shell lives at `@openorca-ui/react/theme` (stylesheet at `@openorca-ui/react/styles.css`).
+
 Use `@openorca-ui/react` when you want OpenOrca building blocks without committing to the full shell.
 
 ## What It Owns

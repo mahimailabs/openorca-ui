@@ -9,7 +9,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: "Getting Started", link: "/getting-started/" },
-      { text: "Packages", link: "/packages/core" },
+      { text: "Packages", link: "/packages/react" },
       { text: "Guides", link: "/guides/runtime-mode" },
       { text: "Integrations", link: "/integrations/overview" },
       { text: "Reference", link: "/reference/theme" },
@@ -37,9 +37,9 @@ export default defineConfig({
         {
           text: "Packages",
           items: [
-            { text: "Core", link: "/packages/core" },
+            { text: "Runtime (core)", link: "/packages/core" },
             { text: "React", link: "/packages/react" },
-            { text: "Theme", link: "/packages/theme" },
+            { text: "Theme shell", link: "/packages/theme" },
           ],
         },
       ],
@@ -81,9 +81,9 @@ export default defineConfig({
         {
           text: "Reference",
           items: [
-            { text: "Core", link: "/reference/core" },
+            { text: "Runtime (core)", link: "/reference/core" },
             { text: "React", link: "/reference/react" },
-            { text: "Theme", link: "/reference/theme" },
+            { text: "Theme shell", link: "/reference/theme" },
           ],
         },
       ],

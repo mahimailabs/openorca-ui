@@ -8,7 +8,8 @@ This is the fastest end-to-end consumer path.
 npm create vite@latest my-openorca-app -- --template react-ts
 cd my-openorca-app
 npm install
-npm install @openorca-ui/core @openorca-ui/react @openorca-ui/theme
+npm install @openorca-ui/react
+# Optional peers for the bundled stylesheet: tailwindcss tw-animate-css
 ```
 
 ## `src/main.tsx`
@@ -16,7 +17,7 @@ npm install @openorca-ui/core @openorca-ui/react @openorca-ui/theme
 ```tsx
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "@openorca-ui/theme/styles.css";
+import "@openorca-ui/react/styles.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 ```
@@ -24,7 +25,7 @@ createRoot(document.getElementById("root")!).render(<App />);
 ## `src/App.tsx`
 
 ```tsx
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
 
 export default function App() {
   return (

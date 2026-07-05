@@ -1,6 +1,6 @@
 # Getting Started
 
-The fastest path is to render the full dashboard from `@openorca-ui/theme`.
+The fastest path is to render the full dashboard from `@openorca-ui/react/theme`.
 
 Use this path when you want:
 

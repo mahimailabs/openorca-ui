@@ -7,7 +7,7 @@ Import the OpenOrca stylesheet once at your app entry, then wrap the page with `
 ```tsx
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "@openorca-ui/theme/styles.css";
+import "@openorca-ui/react/styles.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 ```
@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")!).render(<App />);
 ## `src/App.tsx`
 
 ```tsx
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
 
 export default function App() {
   return (

@@ -14,7 +14,7 @@ OpenOrca revolves around a shared operational state model.
 
 ## Why This Matters
 
-The UI packages are useful because they share one stable data model. Demo mode and runtime mode both end up rendering the same shapes.
+The `@openorca-ui/react` package is useful because its entry points share one stable data model. Demo mode and runtime mode both end up rendering the same shapes.
 
 ## Snapshot Shape
 

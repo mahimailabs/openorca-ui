@@ -1,13 +1,15 @@
-# `@openorca-ui/theme`
+# `@openorca-ui/react/theme`
 
-Use `@openorca-ui/theme` when you want the full branded OpenOrca experience with minimal setup.
+> Formerly the standalone `@openorca-ui/theme` package. The library is now published as a single package, `@openorca-ui/react`, and the branded shell ships as the `@openorca-ui/react/theme` subpath (stylesheet at `@openorca-ui/react/styles.css`). Install `@openorca-ui/react` to use it.
+
+Use `@openorca-ui/react/theme` when you want the full branded OpenOrca experience with minimal setup.
 
 ## What It Owns
 
 - `OpenOrcaProvider`
 - `OpenOrcaDashboard`
 - the default OpenOrca shell composition
-- the published stylesheet at `@openorca-ui/theme/styles.css`
+- the published stylesheet at `@openorca-ui/react/styles.css`
 
 ## Use It When
 
@@ -18,8 +20,8 @@ Use `@openorca-ui/theme` when you want the full branded OpenOrca experience with
 ## Minimum Usage
 
 ```tsx
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
-import "@openorca-ui/theme/styles.css";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
+import "@openorca-ui/react/styles.css";
 
 export function App() {
   return (

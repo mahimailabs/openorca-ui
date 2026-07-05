@@ -1,10 +1,12 @@
 # Theme Reference
 
+> Formerly the standalone `@openorca-ui/theme` package. The branded shell is now the `@openorca-ui/react/theme` subpath of the single published `@openorca-ui/react` package (stylesheet at `@openorca-ui/react/styles.css`). Install `@openorca-ui/react` to use it.
+
 ## Package
 
 ```ts
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
-import "@openorca-ui/theme/styles.css";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
+import "@openorca-ui/react/styles.css";
 ```
 
 ## `OpenOrcaProvider`
@@ -33,4 +35,4 @@ interface OpenOrcaDashboardProps {
 
 ## Stylesheet
 
-Import `@openorca-ui/theme/styles.css` once at your app entry.
+Import `@openorca-ui/react/styles.css` once at your app entry.
