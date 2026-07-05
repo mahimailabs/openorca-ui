@@ -67,6 +67,10 @@ export default defineConfig({
               link: "/integrations/runtime-bridge-contract",
             },
             {
+              text: "VoiceGateway",
+              link: "/integrations/voicegateway",
+            },
+            {
               text: "LangGraph Python",
               link: "/integrations/langgraph-python",
             },
