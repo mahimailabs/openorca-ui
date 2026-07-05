@@ -6,7 +6,7 @@ import {
   type OpenOrcaRuntimeInfo,
   type OpenOrcaSnapshot,
   type ResolveInterventionRequest,
-} from "@openorca-ui/core/runtime";
+} from "@openorca-ui/react/core/runtime";
 
 export interface OpenOrcaRuntimeConfig {
   snapshotUrl: string;

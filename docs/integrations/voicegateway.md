@@ -31,8 +31,8 @@ voicegw serve --port 8080
 Then render the dashboard in runtime mode against it:
 
 ```tsx
-import { OpenOrcaProvider, OpenOrcaDashboard } from "@openorca-ui/theme";
-import "@openorca-ui/theme/styles.css";
+import { OpenOrcaProvider, OpenOrcaDashboard } from "@openorca-ui/react/theme";
+import "@openorca-ui/react/styles.css";
 
 const VG = "http://localhost:8080"; // your voicegw serve base URL
 

@@ -16,9 +16,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@openorca-ui/core": path.resolve(import.meta.dirname, "packages", "core", "src"),
       "@openorca-ui/react": path.resolve(import.meta.dirname, "packages", "react", "src"),
-      "@openorca-ui/theme": path.resolve(import.meta.dirname, "packages", "theme", "src"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },

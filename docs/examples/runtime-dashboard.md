@@ -5,7 +5,7 @@ This example assumes you already have a bridge service exposing the OpenOrca run
 ## `src/App.tsx`
 
 ```tsx
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
 
 export default function App() {
   return (

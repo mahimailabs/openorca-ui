@@ -3,6 +3,9 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: [
     "src/index.ts",
+    "src/core/*.ts",
+    "src/theme/*.ts",
+    "src/theme/*.tsx",
     "src/components/**/*.tsx",
     "src/hooks/*.ts",
     "src/lib/*.ts",

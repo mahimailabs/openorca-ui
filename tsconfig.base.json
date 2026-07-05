@@ -11,12 +11,8 @@
     "baseUrl": ".",
     "types": ["node", "vite/client"],
     "paths": {
-      "@openorca-ui/core": ["./packages/core/src/index.ts"],
-      "@openorca-ui/core/*": ["./packages/core/src/*"],
       "@openorca-ui/react": ["./packages/react/src/index.ts"],
       "@openorca-ui/react/*": ["./packages/react/src/*"],
-      "@openorca-ui/theme": ["./packages/theme/src/index.ts"],
-      "@openorca-ui/theme/*": ["./packages/theme/src/*"],
       "@assets": ["./attached_assets"]
     }
   }

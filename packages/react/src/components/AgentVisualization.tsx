@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ClawAgent, Swarm, domainColors, statusColors, integrationIcons,
   AgentDomain, AgentStatus
-} from '@openorca-ui/core/clawData';
+} from '@openorca-ui/react/core/clawData';
 import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import clawAgentImg from '@openorca-ui/react/assets/images/claw-agent.png';
 

@@ -1,6 +1,8 @@
-# `@openorca-ui/core`
+# `@openorca-ui/react/runtime`
 
-Use `@openorca-ui/core` for shared contracts and framework-agnostic data shapes.
+> Formerly the standalone `@openorca-ui/core` package. The library is now published as a single package, `@openorca-ui/react`, and these contracts ship as the `@openorca-ui/react/runtime` subpath (with the full barrel available at `@openorca-ui/react/core`). Install `@openorca-ui/react` to use them.
+
+Use `@openorca-ui/react/runtime` for shared contracts and framework-agnostic data shapes.
 
 ## What It Owns
 
@@ -17,11 +19,11 @@ Use `@openorca-ui/core` for shared contracts and framework-agnostic data shapes.
 ## Key Imports
 
 ```ts
-import { generateClawData } from "@openorca-ui/core/clawData";
+import { generateClawData } from "@openorca-ui/react/core/clawData";
 import type {
   OpenOrcaEvent,
   OpenOrcaRuntimeInfo,
   OpenOrcaSnapshot,
   ResolveInterventionRequest,
-} from "@openorca-ui/core/runtime";
+} from "@openorca-ui/react/runtime";
 ```

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ActionEntry, ClawAgent, integrationIcons } from '@openorca-ui/core/clawData';
+import { ActionEntry, ClawAgent, integrationIcons } from '@openorca-ui/react/core/clawData';
 import { Check, X, Clock, Mail, MessageCircle, FileText, Globe, Calendar, Terminal, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@openorca-ui/react/components/ui/button';
 

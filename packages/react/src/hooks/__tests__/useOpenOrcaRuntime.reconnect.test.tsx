@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { OpenOrcaSnapshot } from "@openorca-ui/core/runtime";
+import type { OpenOrcaSnapshot } from "@openorca-ui/react/core/runtime";
 import { useOpenOrcaRuntime } from "../useOpenOrcaRuntime";
 
 // Same MockEventSource harness shape as useOpenOrcaRuntime.test.tsx so the two

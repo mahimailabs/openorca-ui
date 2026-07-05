@@ -13,15 +13,15 @@ import {
   AgentVisualization,
   FleetHealthPanel,
 } from "@openorca-ui/react";
-import { generateClawData } from "@openorca-ui/core/clawData";
+import { generateClawData } from "@openorca-ui/react/core/clawData";
 
 const data = generateClawData();
 ```
 
-Use the generated or runtime-loaded data as input to the individual panels. The `theme` package is essentially a first-party composition of these lower-level primitives.
+Use the generated or runtime-loaded data as input to the individual panels. The `@openorca-ui/react/theme` entry point is essentially a first-party composition of these lower-level primitives.
 
 ## Recommended Strategy
 
-- start with `@openorca-ui/theme`
+- start with `@openorca-ui/react/theme`
 - identify the panels you want to keep
 - move to `@openorca-ui/react` once the layout diverges from the stock shell

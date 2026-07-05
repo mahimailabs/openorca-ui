@@ -1,4 +1,4 @@
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
 
 function App() {
   return (

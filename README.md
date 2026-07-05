@@ -1,21 +1,23 @@
 # OpenOrca UI
 
-OpenOrca UI is a frontend-only React package set for agent operations interfaces.
+OpenOrca UI is a frontend-only React package for agent operations interfaces.
 
-It ships in three packages:
-- `@openorca-ui/core` for shared types and data contracts
-- `@openorca-ui/react` for reusable OpenOrca components
-- `@openorca-ui/theme` for the branded provider and full dashboard shell
+It ships as one published package, `@openorca-ui/react`, with subpath entry points:
+- `@openorca-ui/react` for reusable OpenOrca components and hooks
+- `@openorca-ui/react/runtime` for shared types and data contracts
+- `@openorca-ui/react/theme` for the branded provider and full dashboard shell
 
-Most users should start with `@openorca-ui/theme`.
+Most users should start with `@openorca-ui/react/theme`.
 
 ## Quick Start
 
-Install the packages:
+Install the package:
 
 ```bash
-npm install @openorca-ui/core @openorca-ui/react @openorca-ui/theme
+npm install @openorca-ui/react
 ```
+
+If you render the branded shell and import the stylesheet, `tailwindcss` and `tw-animate-css` are optional peers.
 
 ## Use It On A React Page
 
@@ -26,7 +28,7 @@ The fastest way to use OpenOrca is to render the full dashboard shell.
 ```tsx
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "@openorca-ui/theme/styles.css";
+import "@openorca-ui/react/styles.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 ```
@@ -34,7 +36,7 @@ createRoot(document.getElementById("root")!).render(<App />);
 ### `src/App.tsx`
 
 ```tsx
-import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/theme";
+import { OpenOrcaDashboard, OpenOrcaProvider } from "@openorca-ui/react/theme";
 
 export default function App() {
   return (
@@ -53,7 +55,7 @@ Create a new app:
 npm create vite@latest my-openorca-app -- --template react-ts
 cd my-openorca-app
 npm install
-npm install @openorca-ui/core @openorca-ui/react @openorca-ui/theme
+npm install @openorca-ui/react
 ```
 
 Then replace `src/main.tsx` and `src/App.tsx` with the examples above.
@@ -76,10 +78,10 @@ You do not need to wire those separately for the default dashboard setup.
 
 ## What You Get By Default
 
-With `@openorca-ui/theme`, you get:
+With `@openorca-ui/react/theme`, you get:
 - the full OpenOrca dashboard shell
 - built-in demo/mock state
-- theme styling via `@openorca-ui/theme/styles.css`
+- theme styling via `@openorca-ui/react/styles.css`
 - frontend-only behavior with no backend required
 
 ## Frontend-Only Mode
@@ -96,17 +98,17 @@ This makes it easy to embed OpenOrca into a React app without standing up backen
 
 ## Package Overview
 
-### `@openorca-ui/core`
-
-Use this package when you need OpenOrca domain types and shared data contracts.
-
 ### `@openorca-ui/react`
 
-Use this package when you want lower-level OpenOrca components and hooks to build your own custom layout.
+Import from here when you want lower-level OpenOrca components and hooks to build your own custom layout.
 
-### `@openorca-ui/theme`
+### `@openorca-ui/react/runtime`
 
-Use this package when you want the full branded OpenOrca experience with the least setup.
+Import from here when you need OpenOrca domain types and shared data contracts.
+
+### `@openorca-ui/react/theme`
+
+Import from here when you want the full branded OpenOrca experience with the least setup.
 
 ## Local Development
 
@@ -135,7 +137,7 @@ In the repository Pages settings, set the deployment source to **GitHub Actions*
 ## Example Consumer Shape
 
 The included demo uses the same pattern you should use in your own app:
-- import `@openorca-ui/theme/styles.css` once at app entry
+- import `@openorca-ui/react/styles.css` once at app entry
 - wrap your page in `OpenOrcaProvider`
 - render `OpenOrcaDashboard`
 

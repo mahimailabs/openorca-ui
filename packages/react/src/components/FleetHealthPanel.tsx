@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FleetHealth, Machine } from '@openorca-ui/core/clawData';
+import { FleetHealth, Machine } from '@openorca-ui/react/core/clawData';
 import { 
   Activity, Server, CheckCircle, AlertTriangle, 
   Wifi, WifiOff, Zap, ListChecks 
