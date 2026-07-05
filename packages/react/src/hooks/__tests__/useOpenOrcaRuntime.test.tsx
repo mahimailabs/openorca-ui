@@ -158,7 +158,12 @@ describe("useOpenOrcaRuntime", () => {
 
     expect(result.current.runtimeInfo?.runtime).toBe("livekit-agents");
     expect(result.current.status).toBe("connected");
-    expect(MockEventSource.instances.length).toBeGreaterThan(0);
+
+    // The stream is opened a microtask after the snapshot fetch settles, so
+    // wait for the EventSource instance before firing events on it.
+    await waitFor(() => {
+      expect(MockEventSource.instances.length).toBeGreaterThan(0);
+    });
 
     await act(async () => {
       MockEventSource.latest().emitMessage({
@@ -203,6 +208,12 @@ describe("useOpenOrcaRuntime", () => {
 
     await waitFor(() => {
       expect(result.current.status).toBe("connected");
+    });
+
+    // The stream is opened a microtask after the snapshot fetch settles, so
+    // wait for the EventSource instance before firing events on it.
+    await waitFor(() => {
+      expect(MockEventSource.instances.length).toBeGreaterThan(0);
     });
 
     await act(async () => {
