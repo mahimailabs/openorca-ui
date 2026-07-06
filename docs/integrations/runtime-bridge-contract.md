@@ -28,9 +28,9 @@ interface ResolveInterventionRequest {
 }
 ```
 
-### Optional `GET /openorca/runtime`
+### Optional `GET /openorca/runtime-info`
 
-Returns runtime capability metadata:
+Returns runtime capability metadata (the `runtimeInfoUrl` in the runtime config):
 
 ```ts
 interface OpenOrcaRuntimeInfo {
