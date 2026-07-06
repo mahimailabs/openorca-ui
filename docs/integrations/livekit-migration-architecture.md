@@ -13,7 +13,7 @@ The frontend contract remains:
 - `GET /openorca/snapshot`
 - `GET /openorca/events`
 - `POST /openorca/interventions/resolve`
-- optional `GET /openorca/runtime`
+- optional `GET /openorca/runtime-info`
 
 The dashboard, `useOpenOrcaRuntime`, and the core runtime types stay on the current fetch + SSE + POST transport surface for the first migration phase.
 
